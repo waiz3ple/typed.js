@@ -75,7 +75,7 @@
       <pre>
     <code class="javascript">
   var typed2 = new Typed('#typed2', {
-    strings: ['Some &lt;i&gt;strings&lt;/i&gt; with', 'Some &lt;strong&gt;HTML&lt;/strong&gt;', 'Chars &amp;times; &amp;copy;'],
+    strings: ['Some <i>strings</i> with', 'Some <strong>HTML</strong>', 'Chars &times; &copy;'],
     typeSpeed: 0,
     backSpeed: 0,
     fadeOut: true,
@@ -94,7 +94,7 @@
       <pre>
     <code class="javascript">
   var typed3 = new Typed('#typed3', {
-    strings: ['My strings are: &lt;i&gt;strings&lt;/i&gt; with', 'My strings are: &lt;strong&gt;HTML&lt;/strong&gt;', 'My strings are: Chars &amp;times; &amp;copy;'],
+    strings: ['My strings are: <i>strings</i> with', 'My strings are: <strong>HTML</strong>', 'My strings are: Chars &times; &copy;'],
     typeSpeed: 0,
     backSpeed: 0,
     smartBackspace: true, // this is a default
@@ -133,7 +133,7 @@
       <pre>
     <code class="javascript">
   var typed5 = new Typed('#typed5', {
-    strings: ['1 Some &lt;i&gt;strings&lt;/i&gt; with', '2 Some &lt;strong&gt;HTML&lt;/strong&gt;', '3 Chars &amp;times; &amp;copy;'],
+    strings: ['1 Some <i>strings</i> with', '2 Some <strong>HTML</strong>', '3 Chars &times; &copy;'],
     typeSpeed: 0,
     backSpeed: 0,
     cursorChar: '_',
@@ -161,6 +161,48 @@
   });
     </code>
   </pre>
+
+      <hr />
+
+      <h2 id="nextStringDelay">Next String Delay</h2>
+      <div class="type-wrap">
+        <span id="typed7" style="white-space: pre"></span>
+      </div>
+      <button class="toggle7">Toggle</button>
+      <button class="start7">Start</button>
+      <button class="stop7">Stop</button>
+      <button class="reset7">Reset</button>
+      <button class="destroy7">Destroy</button>
+      <button class="loop7">Toggle Loop</button>
+
+      <pre>
+    <code class="javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log("Initializing Typed.js demo for nextStringDelay...");
+    try {
+      var typed7 = new Typed('#typed7', {
+        strings: ['First string', 'Second string', 'Third string'],
+        typeSpeed: 40,
+        backSpeed: 20,
+        backDelay: 1000,
+        nextStringDelay: 1500, // 1.5s pause before typing the next string
+        loop: true
+      });
+
+      // Control buttons for the Next String Delay demo
+      document.querySelector('.toggle7').addEventListener('click', function() { typed7.toggle(); });
+      document.querySelector('.start7').addEventListener('click', function() { typed7.start(); });
+      document.querySelector('.stop7').addEventListener('click', function() { typed7.stop(); });
+      document.querySelector('.reset7').addEventListener('click', function() { typed7.reset(); });
+      document.querySelector('.destroy7').addEventListener('click', function() { typed7.destroy(); });
+      document.querySelector('.loop7').addEventListener('click', function() { typed7.loop = !typed7.loop; });
+    } catch (error) {
+      console.error('Error initializing Typed.js demo:', error);
+    }
+  });
+    </code>
+  </pre>
+
     </div>
 
     <script type="text/javascript">
@@ -181,12 +223,42 @@
       })();
     </script>
 
-    <!-- <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script> -->
     <script src="dist/typed.umd.js"></script>
     <script src="assets/demos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script>
       hljs.initHighlightingOnLoad();
+    </script>
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log("Initializing Typed.js demo for nextStringDelay...");
+        try {
+          var typed7 = new Typed('#typed7', {
+            strings: ['First string', 'Second string', 'Third string'],
+            typeSpeed: 40,
+            backSpeed: 20,
+            backDelay: 1000,
+            nextStringDelay: 1500, // 1.5s pause before typing the next string
+            loop: true,
+            onBegin: function(self) { console.log('onBegin', self); },
+            onComplete: function(self) { console.log('onComplete', self); },
+            preStringTyped: function(pos, self) { console.log('preStringTyped', pos, self); },
+            onStringTyped: function(pos, self) { console.log('onStringTyped', pos, self); },
+            onLastStringBackspaced: function(self) { console.log('onLastStringBackspaced', self); }
+          });
+
+          // Control buttons for the Next String Delay demo
+          document.querySelector('.toggle7').addEventListener('click', function() { typed7.toggle(); });
+          document.querySelector('.start7').addEventListener('click', function() { typed7.start(); });
+          document.querySelector('.stop7').addEventListener('click', function() { typed7.stop(); });
+          document.querySelector('.reset7').addEventListener('click', function() { typed7.reset(); });
+          document.querySelector('.destroy7').addEventListener('click', function() { typed7.destroy(); });
+          document.querySelector('.loop7').addEventListener('click', function() { typed7.loop = !typed7.loop; });
+        } catch (error) {
+          console.error('Error initializing Typed.js demo:', error);
+        }
+      });
     </script>
   </body>
 </html>
