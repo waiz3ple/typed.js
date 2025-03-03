@@ -48,6 +48,11 @@ const defaults = {
   backDelay: 700,
 
   /**
+   * @property {number} nextStringDelay time before typing the next string in milliseconds
+   */
+  nextStringDelay: 0, // New option: delays typing of the next string after backspacing (default to 0 for no delay)
+
+  /**
    * @property {boolean} fadeOut Fade out instead of backspace
    * @property {string} fadeOutClass css class for fade animation
    * @property {boolean} fadeOutDelay Fade out delay in milliseconds

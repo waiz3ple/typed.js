@@ -224,7 +224,7 @@ export default class Typed {
     if (this.arrayPos === this.strings.length - 1) {
       // callback that occurs on the last typed string
       this.complete();
-      // quit if we wont loop back
+      // quit if we won't loop back
       if (this.loop === false || this.curLoop === this.loopCount) {
         return;
       }
@@ -258,7 +258,7 @@ export default class Typed {
 
       // if smartBack is enabled
       if (this.smartBackspace) {
-        // the remaining part of the current string is equal of the same part of the new string
+        // the remaining part of the current string is equal to the same part of the new string
         let nextString = this.strings[this.sequence[this.arrayPos + 1]];
         if (
           nextString &&
@@ -288,7 +288,10 @@ export default class Typed {
           this.shuffleStringsIfNeeded();
           this.begin();
         } else {
-          this.typewrite(this.strings[this.sequence[this.arrayPos]], curStrPos);
+          // Introduce nextStringDelay before typing the next string
+          this.timeout = setTimeout(() => {
+            this.typewrite(this.strings[this.sequence[this.arrayPos]], curStrPos);
+          }, this.options.nextStringDelay || 0);
         }
       }
       // humanized value for typing
@@ -370,9 +373,13 @@ export default class Typed {
 
       // Resets current string if end of loop reached
       if (this.strings.length > this.arrayPos) {
-        this.typewrite(this.strings[this.sequence[this.arrayPos]], 0);
+        this.timeout = setTimeout(() => {
+          this.typewrite(this.strings[this.sequence[this.arrayPos]], 0);
+        }, this.options.nextStringDelay || 0);
       } else {
-        this.typewrite(this.strings[0], 0);
+        this.timeout = setTimeout(() => {
+          this.typewrite(this.strings[0], 0);
+        }, this.options.nextStringDelay || 0);
         this.arrayPos = 0;
       }
     }, this.fadeOutDelay);

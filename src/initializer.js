@@ -11,7 +11,6 @@ export default class Initializer {
    * @param {string} elementId HTML element ID _OR_ instance of HTML element
    * @private
    */
-
   load(self, options, elementId) {
     // chosen element to manipulate text
     if (typeof elementId === 'string') {
@@ -58,6 +57,9 @@ export default class Initializer {
 
     // amount of time to wait before backspacing
     self.backDelay = self.options.backDelay;
+
+    // amount of time to wait before typing the next string
+    self.nextStringDelay = self.options.nextStringDelay; // New option: delays typing of the next string after backspacing (default to 0 for no delay)
 
     // Fade out instead of backspace
     self.fadeOut = self.options.fadeOut;
